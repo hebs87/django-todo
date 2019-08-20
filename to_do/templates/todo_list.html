@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Things I need to do...</h1>
+    
+    <table>
+        <!--After importing the table into views.py, create for loop to iterate
+        over table items and inject data into the table-->
+        {% for item in items %}
+
+            <tr>
+                <!--if statement to add strike through a 'done' item-->
+                {% if item.done %}
+                    <td><strike>{{ item.name }}</strike></td>
+                {% else %}
+                    <td>{{ item.name }}</td>
+                {% endif %}
+                
+                <!--Toggle status button-->
+                <td>
+                    <form method="POST" action='toggle/{{ item.id }}'>
+                        {% csrf_token %}
+                        <input type="submit" value="Toggle"/>
+                    </form>
+                </td>
+                
+                <!--Edit button-->
+                <td>
+                    <form method="GET" action="edit/{{ item.id }}">
+                        <input type="submit" value="Edit"/>
+                    </form>
+                </td>
+                
+            </tr>
+            
+            <!--Add 'empty' Jinja tag to display a message if the table is empty
+            'empty' has no closing tag-->
+            {% empty %}
+                <p>I have nothing to do!</p>
+
+        {% endfor %}
+        
+    </table>
+
+    <a href="add">Add New Item</a>
+    
+</body>
+</html>

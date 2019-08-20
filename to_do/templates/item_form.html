@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>I need to do this...</h1>
+    
+    <form method="POST">
+
+        <!--csrf_token prevents cross-site scripting
+        FORM WON'T WORK WITHOUT IT-->
+        {% csrf_token %}
+        
+        <!--Import the form from forms.py into the HTML template
+        as_p ensures the form fields are displayed as blosk level elements on separate lines-->
+        {{ form.as_p }}
+
+        <button type="submit">Save</button>
+        
+        
+    </form>
+    
+    
+</body>
+</html>
